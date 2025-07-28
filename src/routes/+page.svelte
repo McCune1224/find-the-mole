@@ -4,6 +4,6 @@
 	The Mole
 </h1>
 <div class="flex flex-col gap-10 w-full max-w-lg">
-	<a href="/survival" class="btn btn-primary big-btn w-full">Survival Mode</a>
+	<a href="/survival" class="btn btn-primary big-btn w-full">Elimination</a>
 	<a href="/players" class="btn btn-secondary big-btn w-full">Player List</a>
 </div>
