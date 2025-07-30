@@ -5,12 +5,11 @@
 	const url = children.url;
 </script>
 
-<nav>
-	<div class="flex flex-row justify-between w-full items-center px-4 py-2">
-		<div class="text-lg font-bold">
-			{url}
-		</div>
-		<a href="/" class="btn big-btn btn-accent mr-auto">Home</a>
+<nav class="navbar bg-base-100 shadow-sm">
+	<div class="flex gap-3">
+		<a href="/" class="btn btn-xl btn-neutral text-xl">Home</a>
+		<a href="/survival" class="btn btn-xl btn-primary text-xl">Elimination</a>
+		<a href="/players" class="btn btn-xl btn-secondary text-xl">Players</a>
 	</div>
 </nav>
 
@@ -28,8 +27,9 @@
 		background-repeat: no-repeat;
 	}
 	.big-btn {
-		font-size: 2.5rem;
-		padding-top: 2rem;
-		padding-bottom: 2rem;
+		font-size: 4rem;
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+		border-radius: 2rem;
 	}
 </style>
