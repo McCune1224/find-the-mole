@@ -7,8 +7,16 @@
 	let overlayBg: "none" | "red" | "green" = $state<"none" | "red" | "green">(
 		"none",
 	);
-	function handleSubmit() {
-		// Example logic: green if name length > 3, else red
+	let loading = $state<boolean>(false);
+
+	function delay(ms: number) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
+	}
+
+	async function handleSubmit() {
+		loading = true;
+		await delay(5000);
+		loading = false;
 		const player = data.players.find(
 			(p) => p.name.toLowerCase() === playerName.toLowerCase(),
 		);
@@ -34,9 +42,21 @@
 {#if overlayBg !== "none"}
 	<div class={`fade-bg-${overlayBg} bg-overlay`}></div>
 {/if}
-<div class="z-10 flex items-center justify-center w-screen h-screen">
+
+<div class="z-10 flex flex-col items-center justify-center w-screen h-screen">
+	{#if loading}
+		<div
+			class="inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 rounded-lg"
+		>
+			<h2
+				class="text-7xl font-extrabold text-green-400 mb-8 tracking-wider animate-pulse"
+			>
+				{"Checking" + "\n" + playerName + "... "}
+			</h2>
+		</div>
+	{/if}
 	<div
-		class="bg-black border-2 border-green-500 rounded-lg shadow-xl p-8 w-11/12 sm:w-3/4 md:w-1/2 h-auto"
+		class="relative bg-black border-2 border-green-500 rounded-lg shadow-xl p-8 w-11/12 sm:w-3/4 md:w-1/2 h-auto"
 	>
 		<form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-6">
 			<span
@@ -46,7 +66,7 @@
 			>
 			<input
 				type="text"
-				disabled={overlayBg !== "none"}
+				disabled={overlayBg !== "none" || loading}
 				bind:value={playerName}
 				class="input input-xl input-bordered w-full font-mono text-2xl bg-black text-green-400 border-green-500 focus:outline-none focus:ring-2 focus:ring-green-600"
 				required
